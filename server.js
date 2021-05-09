@@ -2,12 +2,19 @@ const express = require('express');
 const fs = require('fs');
 
 const app = express()
-const port = 3090
+const PORT = process.env.PORT || 3080;
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
-})
+// require('./routes/apiRoutes')(app);
+// require('./routes/htmlRoutes')(app);
+
+app.listen(PORT, () => {
+    console.log(`App listening on PORT: ${PORT}`);
+  });
+  
+  app.get("/", function(req, res) {
+    res.json(path.join(__dirname, "public/index.html"));
+  });
+  
